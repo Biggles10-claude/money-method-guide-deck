@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0b0c0e" />
+  <title>Money Method Guide · Produce / CREATE · reel DdvfkftpQvl</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0c0e;
+      --panel: #12141a;
+      --ink: #f2f1ec;
+      --muted: #9a9aa3;
+      --dim: #8a8a93;
+      --accent: #d4b56a;
+      --accent-soft: rgba(212, 181, 106, 0.14);
+      --line: rgba(255,255,255,0.10);
+      --ok: #6bcf8e;
+      --warn: #e0a060;
+      --bad: #e07a7a;
+      --safe-t: env(safe-area-inset-top, 0px);
+      --safe-r: env(safe-area-inset-right, 0px);
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-l: env(safe-area-inset-left, 0px);
+      --pad-x: max(1.1rem, var(--safe-l), var(--safe-r));
+      --pad-y: max(0.9rem, var(--safe-t));
+      --pad-b: max(0.75rem, var(--safe-b));
+      --claim: clamp(1.15rem, 3.6vw + 0.55rem, 2.1rem);
+      --body: clamp(0.82rem, 1.4vw + 0.45rem, 1rem);
+      --small: clamp(0.68rem, 1vw + 0.38rem, 0.78rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+      -webkit-text-size-adjust: 100%;
+      overscroll-behavior: none;
+      touch-action: pan-y;
+    }
+
+    body {
+      overflow: hidden;
+      height: 100dvh;
+    }
+
+    .deck-root {
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      padding:
+        calc(var(--pad-y) + 0.35rem)
+        calc(var(--pad-x) + 0.35rem)
+        calc(var(--pad-b) + 2.4rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.55rem, 1.5vh, 1rem);
+      background: var(--bg);
+    }
+
+    .kicker {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: var(--small);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    .kicker .dot {
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    h1, h2 {
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+      color: var(--ink);
+      text-wrap: balance;
+    }
+
+    .claim {
+      font-size: var(--claim);
+      max-width: 22ch;
+    }
+
+    .claim em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .subclaim {
+      margin: 0.45rem 0 0;
+      font-size: var(--body);
+      color: var(--muted);
+      max-width: 48ch;
+      line-height: 1.45;
+    }
+
+    .aside-note {
+      margin: 0.75rem 0 0;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--line);
+      font-size: var(--body);
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 28ch;
+    }
+
+    .aside-note code {
+      color: var(--accent);
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+      font-size: var(--small);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dim);
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .head { flex-shrink: 0; }
+
+    .body-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(0.6rem, 1.8vh, 1.1rem);
+      min-height: 0;
+      flex: 1 1 auto;
+      align-items: stretch;
+    }
+
+    .body-split .copy { flex-shrink: 0; }
+
+    .frame {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--panel);
+      min-height: 0;
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0.75rem;
+      gap: 0.5rem;
+    }
+
+    .thesis-bar {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      margin-top: 0.65rem;
+      flex: 1 1 auto;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .thesis-pill {
+      border: 1px solid rgba(212,181,106,0.28);
+      background: rgba(212,181,106,0.10);
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      font-size: clamp(0.75rem, 1.3vw + 0.4rem, 0.88rem);
+      color: #e8e6df;
+      line-height: 1.35;
+    }
+
+    .thesis-pill strong {
+      display: block;
+      color: var(--accent);
+      font-size: 0.68em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .thesis-pill.warn {
+      border-color: rgba(224,160,96,0.35);
+      background: rgba(224,160,96,0.10);
+    }
+    .thesis-pill.warn strong { color: var(--warn); }
+
+    .thesis-pill.ok {
+      border-color: rgba(107,207,142,0.35);
+      background: rgba(107,207,142,0.10);
+    }
+    .thesis-pill.ok strong { color: var(--ok); }
+
+    .thesis-pill.bad {
+      border-color: rgba(224,122,122,0.35);
+      background: rgba(224,122,122,0.10);
+    }
+    .thesis-pill.bad strong { color: var(--bad); }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      flex: 1 1 auto;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      background: var(--panel);
+      min-height: 0;
+    }
+
+    .card .badge {
+      display: inline-block;
+      font-size: clamp(0.7rem, 0.9vw + 0.4rem, 0.72rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      padding: 0.2rem 0.45rem;
+      border-radius: 999px;
+    }
+
+    .card .badge.ok {
+      color: #0b0c0e;
+      background: var(--ok);
+      border-color: transparent;
+    }
+
+    .card .badge.warn {
+      color: #0b0c0e;
+      background: var(--warn);
+      border-color: transparent;
+    }
+
+    .card .badge.bad {
+      color: #0b0c0e;
+      background: var(--bad);
+      border-color: transparent;
+    }
+
+    .card .badge.accent {
+      color: #0b0c0e;
+      background: var(--accent);
+      border-color: transparent;
+    }
+
+    .card strong {
+      display: block;
+      font-size: clamp(0.85rem, 1.5vw + 0.4rem, 0.98rem);
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .card span, .card p {
+      margin: 0;
+      font-size: clamp(0.72rem, 1.2vw + 0.35rem, 0.85rem);
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .card.num {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.65rem;
+      align-items: start;
+    }
+
+    .card .n {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+      font-size: clamp(0.95rem, 1.8vw + 0.4rem, 1.15rem);
+      color: var(--accent);
+      font-weight: 500;
+      line-height: 1.2;
+      min-width: 1.6ch;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      flex: 1 1 auto;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.75rem 0.9rem;
+      background: var(--panel);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    .kpi .col label {
+      display: block;
+      font-size: var(--small);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .kpi .col .val {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+      font-size: clamp(0.95rem, 2vw + 0.4rem, 1.35rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .kpi .col .val.claim-val { color: var(--bad); }
+    .kpi .col .val.real-val { color: var(--ok); }
+
+    .kpi .foot {
+      grid-column: 1 / -1;
+      font-size: clamp(0.7rem, 1.1vw + 0.35rem, 0.8rem);
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 0.45rem;
+      margin-top: 0.1rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.45rem;
+      flex: 1 1 auto;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .flow .step {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.65rem 0.8rem;
+      background: var(--panel);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .flow .step .n {
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+      color: var(--accent);
+      font-size: clamp(0.9rem, 1.5vw + 0.4rem, 1.05rem);
+      font-weight: 500;
+    }
+
+    .flow .step strong {
+      display: block;
+      font-size: clamp(0.82rem, 1.4vw + 0.4rem, 0.95rem);
+      color: var(--ink);
+    }
+
+    .flow .step span {
+      font-size: clamp(0.7rem, 1.1vw + 0.35rem, 0.8rem);
+      color: var(--muted);
+    }
+
+    .takeaways {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      flex: 1 1 auto;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .takeaways .item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      background: var(--panel);
+    }
+
+    .takeaways .item strong {
+      display: block;
+      font-size: clamp(0.85rem, 1.5vw + 0.4rem, 0.98rem);
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .takeaways .item span {
+      font-size: clamp(0.72rem, 1.2vw + 0.35rem, 0.85rem);
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .takeaways .item.accent {
+      background: var(--accent-soft);
+      border-color: rgba(212,181,106,0.28);
+    }
+
+    .takeaways .item.accent strong { color: var(--accent); }
+
+    .takeaways .item.warn {
+      background: rgba(224,160,96,0.10);
+      border-color: rgba(224,160,96,0.28);
+    }
+    .takeaways .item.warn strong { color: var(--warn); }
+
+    .takeaways .item.ok {
+      background: rgba(107,207,142,0.10);
+      border-color: rgba(107,207,142,0.28);
+    }
+    .takeaways .item.ok strong { color: var(--ok); }
+
+    .takeaways .item.bad {
+      background: rgba(224,122,122,0.10);
+      border-color: rgba(224,122,122,0.28);
+    }
+    .takeaways .item.bad strong { color: var(--bad); }
+
+    @media (orientation: landscape), (min-width: 900px) {
+      .body-split {
+        grid-template-columns: minmax(11rem, 0.36fr) 1fr;
+        gap: clamp(0.8rem, 2vw, 1.4rem);
+        align-items: stretch;
+      }
+
+      .body-split .copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .thesis-bar { grid-template-columns: repeat(3, 1fr); }
+      .thesis-bar.cols-2 { grid-template-columns: 1fr 1fr; }
+
+      .cards.cols-2 { grid-template-columns: 1fr 1fr; }
+      .cards.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+      .cards.cols-4 { grid-template-columns: 1fr 1fr; }
+
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+      .flow { grid-template-columns: 1fr 1fr; }
+      .takeaways { grid-template-columns: 1fr 1fr; }
+      .takeaways.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    @media (orientation: portrait) and (max-width: 899px) {
+      .claim { max-width: 100%; }
+      .aside-note { max-width: 100%; }
+      .body-split .frame { min-height: 38dvh; }
+    }
+
+    @media (orientation: landscape) and (max-height: 520px) {
+      .slide {
+        padding-top: calc(var(--pad-y) + 0.15rem);
+        padding-bottom: calc(var(--pad-b) + 2rem);
+        gap: 0.4rem;
+      }
+      .aside-note { margin-top: 0.4rem; padding-top: 0.4rem; }
+      .thesis-pill, .card, .kpi, .flow .step, .takeaways .item { padding: 0.45rem 0.6rem; }
+      .meta { display: none; }
+    }
+
+    .chrome {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0.45rem calc(var(--pad-x) + 0.35rem) calc(var(--pad-b) + 0.35rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .dots {
+      display: flex;
+      gap: 0.35rem;
+      align-items: center;
+      pointer-events: auto;
+      flex-wrap: nowrap;
+    }
+
+    .dots button {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      border: 0;
+      padding: 0;
+      background: var(--dim);
+      cursor: pointer;
+      transition: background 160ms ease, transform 160ms ease;
+      flex-shrink: 0;
+    }
+
+    .dots button[aria-current="true"] {
+      background: var(--accent);
+      transform: scale(1.25);
+    }
+
+    .hint {
+      font-size: var(--small);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dim);
+      pointer-events: none;
+      white-space: nowrap;
+      font-family: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+    }
+
+    .nav-hit {
+      position: absolute;
+      top: 0;
+      bottom: 2.5rem;
+      width: 18%;
+      max-width: 7rem;
+      z-index: 4;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .nav-hit.prev { left: 0; }
+    .nav-hit.next { right: 0; }
+
+    .nav-hit:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -4px;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .nav-hit.prev:hover { background: linear-gradient(90deg, rgba(255,255,255,0.04), transparent); }
+      .nav-hit.next:hover { background: linear-gradient(270deg, rgba(255,255,255,0.04), transparent); }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-root" id="deck">
+    <div class="track" id="track">
+
+      <!-- 01 · Title -->
+      <section class="slide" data-label="title">
+        <div class="kicker"><span class="dot"></span> Money Method guide · reel DdvfkftpQvl</div>
+        <div class="head">
+          <h1 class="claim">Produce / CREATE — operator guide.</h1>
+          <p class="subclaim">Comprehensive read of the @blakefakhoury pitch: core funnel, parallel plays, expansion, and risks. Research 2026-09-30 AWST (PT).</p>
+          <div class="thesis-bar">
+            <div class="thesis-pill"><strong>Core</strong>CREATE → mentorship, not open SaaS</div>
+            <div class="thesis-pill warn"><strong>Income</strong>Exemplar $ claims not supported</div>
+            <div class="thesis-pill ok"><strong>Verdict</strong>Copy mechanic · buy coaching access</div>
+          </div>
+        </div>
+        <div class="meta">
+          <span>@blakefakhoury · Blake Ryan · Cadia / Produce</span>
+          <span>01 / 10</span>
+        </div>
+      </section>
+
+      <!-- 02 · Thesis -->
+      <section class="slide" data-label="thesis">
+        <div class="kicker"><span class="dot"></span> Thesis</div>
+        <div class="body-split">
+          <div class="copy">
+            <h2 class="claim">CREATE is <em>mentorship bait</em>, not open SaaS.</h2>
+            <p class="aside-note">Keyword CTA on IG — <strong>not</strong> a Produce.so product feature. Live web stack routes to 90-Day Mentorship.</p>
+          </div>
+          <div class="cards cols-2">
+            <div class="card">
+              <span class="badge warn">Pitch frame</span>
+              <strong>Comment CREATE for “the tool”</strong>
+              <span>Reel sells AI faceless YouTube + auto-edit software access.</span>
+            </div>
+            <div class="card">
+              <span class="badge bad">Live stack</span>
+              <strong>Cal.com mentorship application</strong>
+              <span>Then Vid.GG / Discord / Produce discount — gated, not checkout.</span>
+            </div>
+            <div class="card">
+              <span class="badge">Gap</span>
+              <strong>Exact DM copy not IG-tested</strong>
+              <span>Path inferred from public sites; Private Reply payload unknown.</span>
+            </div>
+            <div class="card">
+              <span class="badge accent">Read as</span>
+              <strong>PARTLY / MISLEADING</strong>
+              <span>vs open-tool expectation; operator sells coaching + tool access.</span>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <span>blakefakhoury.com · produce.so · Meta PR pattern</span>
+          <span>02 / 10</span>
+        </div>
+      </section>
+
+      <!-- 03 · Core pitch steps -->
+      <section class="slide" data-label="pitch">
+        <div class="kicker"><span class="dot"></span> Core method · reel pitch</div>
+        <div class="head">
+          <h2 class="claim">The reel pitch in <em>four</em> steps.</h2>
+        </div>
+        <div class="cards cols-2">
+          <div class="card num">
+            <div class="n">01</div>
+            <div>
+              <strong>Legacy exemplar</strong>
+              <span>The Theorizer Coraline ultra-long (~“$500k from that video”).</span>
+            </div>
+          </div>
+          <div class="card num">
+            <div class="n">02</div>
+            <div>
+              <strong>AI replica</strong>
+              <span>2026 Plot Anomaly–style channel allegedly ~$20k/mo.</span>
+            </div>
+          </div>
+          <div class="card num">
+            <div class="n">03</div>
+            <div>
+              <strong>Own software</strong>
+              <span>Blake’s auto-edit / Produce.so ultra-long YouTube engine.</span>
+            </div>
+          </div>
+          <div class="card num">
+            <div class="n">04</div>
+            <div>
+              <strong>CTA</strong>
+              <span>Comment <em style="color:var(--accent);font-style:normal">CREATE</em> → keyword DM funnel.</span>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <span>~47.7s · reel DdvfkftpQvl · ~2026-09-26</span>
+          <span>03 / 10</span>
+        </div>
+      </section>
+
+      <!-- 04 · Income claims NOT SUPPORTED -->
+      <section class="slide" data-label="income">
+        <div class="kicker"><span class="dot"></span> Evidence · income claims</div>
+        <div class="head">
+          <h2 class="claim">Income claims are <em>not supported</em>.</h2>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="col">
+              <label>Claimed · Theorizer video</label>
+              <div class="val claim-val">~$500k</div>
+            </div>
+            <div class="col">
+              <label>Public ad band</label>
+              <div class="val real-val">$5.8–16.6K</div>
+            </div>
+            <div class="foot">Socialcounts · Coraline 2h (~8.33M views). Likely 500k-subs conflation.</div>
+          </div>
+          <div class="kpi">
+            <div class="col">
+              <label>Claimed · Plot Anomaly</label>
+              <div class="val claim-val">~$20k/mo</div>
+            </div>
+            <div class="col">
+              <label>SB / RPM band</label>
+              <div class="val real-val">$100s–low $K</div>
+            </div>
+            <div class="foot">Entertainment RPM ~$2–$5; ~4M views/mo at $5 needed for $20k.</div>
+          </div>
+        </div>
+        <div class="meta">
+          <span>NOT SUPPORTED · no Studio / interview proof</span>
+          <span>04 / 10</span>
+        </div>
+      </section>
+
+      <!-- 05 · Produce.so -->
+      <section class="slide" data-label="produce">
+        <div class="kicker"><span class="dot"></span> Product · Produce.so</div>
+        <div class="head">
+          <h2 class="claim">Produce.so is real — <em>mentorship-gated</em>.</h2>
+        </div>
+        <div class="cards cols-2">
+          <div class="card">
+            <span class="badge ok">Company</span>
+            <strong>Cadia Studios Pty Ltd</strong>
+            <span>ABN 18 677 399 736 · Active NSW. Blake Fakhoury = Blake Ryan.</span>
+          </div>
+          <div class="card">
+            <span class="badge warn">Access</span>
+            <strong>Mentorship-only (live)</strong>
+            <span>Homepage: exclusively within Blake Ryan mentorship — no self-serve SaaS.</span>
+          </div>
+          <div class="card">
+            <span class="badge">History</span>
+            <strong>Was SaaS-priced</strong>
+            <span>Wayback 2026-05-28: Creator $169 / Pro $329 / Scale $549.</span>
+          </div>
+          <div class="card">
+            <span class="badge">CREATE ≠ module</span>
+            <strong>IG CTA convention only</strong>
+            <span>No public CREATE product feature on Produce.so.</span>
+          </div>
+        </div>
+        <div class="meta">
+          <span>Not HOTF Melbourne Blake Ryan · TrustMRR directional only</span>
+          <span>05 / 10</span>
+        </div>
+      </section>
+
+      <!-- 06 · Funnel map -->
+      <section class="slide" data-label="funnel">
+        <div class="kicker"><span class="dot"></span> Funnel map · inferred</div>
+        <div class="head">
+          <h2 class="claim">CREATE routes to mentorship, not checkout.</h2>
+        </div>
+        <div class="flow">
+          <div class="step">
+            <div class="n">01</div>
+            <div><strong>Comment CREATE</strong><span>IG Reel keyword CTA</span></div>
+          </div>
+          <div class="step">
+            <div class="n">02</div>
+            <div><strong>Private Reply / DM</strong><span>ManyChat-class · 1 PR / user / 7d</span></div>
+          </div>
+          <div class="step">
+            <div class="n">03</div>
+            <div><strong>90-Day Mentorship</strong><span>blakefakhoury.com · Cal.com apply</span></div>
+          </div>
+          <div class="step">
+            <div class="n">04</div>
+            <div><strong>Vid.GG · Discord · Produce</strong><span>monetised.net + 1% YT + discount</span></div>
+          </div>
+        </div>
+        <div class="meta">
+          <span>Inferred from live web stack · DM not IG-tested</span>
+          <span>06 / 10</span>
+        </div>
+      </section>
+
+      <!-- 07 · Parallel plays -->
+      <section class="slide" data-label="parallels">
+        <div class="kicker"><span class="dot"></span> Parallel / adjacent methods</div>
+        <div class="head">
+          <h2 class="claim">Copy the mechanic without Blake’s stack.</h2>
+        </div>
+        <div class="cards cols-3">
+          <div class="card">
+            <span class="badge">Faceless YT</span>
+            <strong>Open content engine</strong>
+            <span>YPP + Jul 2025 inauthentic-content risk.</span>
+          </div>
+          <div class="card">
+            <span class="badge">AI UGC</span>
+            <strong>Agency retainers</strong>
+            <span>HeyGen / Creatify · ~$2k–$15k+/mo cited.</span>
+          </div>
+          <div class="card">
+            <span class="badge ok">Stan Y-funnel</span>
+            <strong>Self-serve checkout</strong>
+            <span>Lead magnet → tripwire → upsell/downsell.</span>
+          </div>
+          <div class="card">
+            <span class="badge">Systeme webinar</span>
+            <strong>Price-band close</strong>
+            <span>&lt;$500 page · $500–$2k webinar · $2k+ call.</span>
+          </div>
+          <div class="card">
+            <span class="badge">Skool</span>
+            <strong>Free → paid community</strong>
+            <span>~$49–$199/mo · ~5–15% upgrade cite.</span>
+          </div>
+          <div class="card">
+            <span class="badge accent">Open tools</span>
+            <strong>Produce alternatives</strong>
+            <span>Kliptory · Framesail · Viducer · Spellzi · LongStories.</span>
+          </div>
+        </div>
+        <div class="meta">
+          <span>Vendor cases directional · ManyChat BANT/CHAMP peers</span>
+          <span>07 / 10</span>
+        </div>
+      </section>
+
+      <!-- 08 · Expansion -->
+      <section class="slide" data-label="expansion">
+        <div class="kicker"><span class="dot"></span> Expansion / scale path</div>
+        <div class="head">
+          <h2 class="claim">Scale path: ops, niches, then offers.</h2>
+        </div>
+        <div class="cards cols-2">
+          <div class="card num">
+            <div class="n">01</div>
+            <div>
+              <strong>Ops ladder</strong>
+              <span>Multi-Reel keywords → agency ManyChat workspaces → Meta ads on winners.</span>
+            </div>
+          </div>
+          <div class="card num">
+            <div class="n">02</div>
+            <div>
+              <strong>Niche ladder</strong>
+              <span>Entertainment ~$2–$5 RPM → finance / SaaS / AI tools (directional).</span>
+            </div>
+          </div>
+          <div class="card num">
+            <div class="n">03</div>
+            <div>
+              <strong>Monetization ladder</strong>
+              <span>AdSense floor → affiliates → products → high-ticket coaching.</span>
+            </div>
+          </div>
+          <div class="card num">
+            <div class="n">04</div>
+            <div>
+              <strong>Operator evidence</strong>
+              <span>This method’s proven money = mentorship + gated tools, not beginner AdSense.</span>
+            </div>
+          </div>
+        </div>
+        <div class="meta">
+          <span>Hard ceiling: Meta 1 Private Reply / commenter / 7 days</span>
+          <span>08 / 10</span>
+        </div>
+      </section>
+
+      <!-- 09 · Risks -->
+      <section class="slide" data-label="risks">
+        <div class="kicker"><span class="dot"></span> Risks / caveats</div>
+        <div class="head">
+          <h2 class="claim">Four buyer risks before you buy in.</h2>
+        </div>
+        <div class="takeaways">
+          <div class="item bad">
+            <strong>Refund conflict</strong>
+            <span>Apply-site markets 90-day full refund if not monetised; Vid.GG T&amp;Cs say all sales final.</span>
+          </div>
+          <div class="item warn">
+            <strong>monetize.net dead</strong>
+            <span>Legacy URL is Afternic/GoDaddy for-sale park; live Vid.GG is monetised.net.</span>
+          </div>
+          <div class="item warn">
+            <strong>YPP inauthentic</strong>
+            <span>Jul 2025 policy hits mass-produced template AI faceless farms.</span>
+          </div>
+          <div class="item">
+            <strong>Meta 1-PR / 7d</strong>
+            <span>One auto Private Reply per commenter per 7 days; scrapers = ban risk.</span>
+          </div>
+        </div>
+        <div class="meta">
+          <span>No Trustpilot/BBB scam corpus found · opacity ≠ proven fraud</span>
+          <span>09 / 10</span>
+        </div>
+      </section>
+
+      <!-- 10 · Summary -->
+      <section class="slide" data-label="summary">
+        <div class="kicker"><span class="dot"></span> Summary · operator verdict</div>
+        <div class="head">
+          <h2 class="claim">Three takeaways for operators.</h2>
+        </div>
+        <div class="takeaways cols-3">
+          <div class="item accent">
+            <strong>Operator sells coaching</strong>
+            <span>Evidenced money path = high-ticket mentorship + gated Produce / Vid.GG — not verified $20k AdSense.</span>
+          </div>
+          <div class="item ok">
+            <strong>Copy open stacks</strong>
+            <span>Faceless YT, AI UGC, Stan/Systeme/Skool, open long-form tools run the mechanic without buy-in.</span>
+          </div>
+          <div class="item">
+            <strong>Verify income claims</strong>
+            <span>$500k / $20k/mo exemplars NOT SUPPORTED by public analytics — demand proof before paying.</span>
+          </div>
+        </div>
+        <div class="meta">
+          <span>Full report in docs/REPORT.md · 2026-09-30 AWST</span>
+          <span>10 / 10</span>
+        </div>
+      </section>
+
+    </div>
+
+    <button class="nav-hit prev" type="button" aria-label="Previous slide" id="prevHit"></button>
+    <button class="nav-hit next" type="button" aria-label="Next slide" id="nextHit"></button>
+
+    <div class="chrome">
+      <div class="dots" id="dots" role="tablist" aria-label="Slides"></div>
+      <div class="hint" id="hint">01 / 10</div>
+    </div>
+  </div>
+
+  <script src="assets/deck.js"></script>
+</body>
+</html>
